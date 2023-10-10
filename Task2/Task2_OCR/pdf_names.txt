@@ -1,0 +1,2 @@
+handwritten_text_scan.pdf
+printed_text_scan.pdf
