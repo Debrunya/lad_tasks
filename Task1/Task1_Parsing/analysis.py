@@ -105,24 +105,26 @@ class Analysis():
         total_vacancies = self.result_df.sum(axis=1) #количество вакансий по специальностям
         vacancies_np_arr = self.result_df.to_numpy() #табличка в представлении двумерного массива
         legend=['junior', 'middle', 'senior', 'lead']
+        img = plt.imread('hh.png')
         
         #конструируем фигуру и ее элементы
-        fig = plt.figure(figsize=(14, 7))
-        fig.canvas.manager.set_window_title('Графическое представление о кол-ве вакансий по направлениям и грейдам в Н. Новгороде')
-        fig.suptitle('Графическое представление о кол-ве вакансий по направлениям и грейдам в Н. Новгороде', fontsize=18)
+        fig = plt.figure(figsize=(14, 7), facecolor='lightblue')
+        fig.canvas.manager.set_window_title('Количесиво вакансий по направлениям и уровням в Н. Новгороде')
+        fig.suptitle('Количество вакансий по направлениям и уровням в Н. Новгороде', fontsize=18)
         ax1 = fig.add_subplot(1, 2, 1)
+        ax1.imshow(img, zorder=0, extent=[-1.1, -0.85, -1.1, -0.85])
         ax2 = fig.add_subplot(1, 2, 2)
-        
+        ax2.imshow(img, zorder=0, extent=[-1.1, -0.85, -1.1, -0.85])
         
         #конструируем первую диаграмму для аналитиков
-        ax1.set_title('Analysts', fontsize=16)
+        ax1.set_title('Data Analysts', fontsize=16)
         ax1.pie(vacancies_np_arr[0], labels=legend, labeldistance=1.05, shadow=True, explode=[0.08, 0.05, 0.05, 0.1],
                 wedgeprops={'edgecolor':'black', 'antialiased':True},
                 autopct=lambda x: '{:.0f}'.format(x*total_vacancies[0]/100), pctdistance=0.8)
         ax1.legend()
         
         #конструируем вторую диаграмму для саентистов
-        ax2.set_title('Scientists', fontsize=16)
+        ax2.set_title('Data Scientists', fontsize=16)
         ax2.pie(vacancies_np_arr[1], labels=legend, labeldistance=1.05, shadow=True, explode=[0.08, 0.05, 0.05, 0.1],
                 wedgeprops={'edgecolor':'black', 'antialiased':True},
                 autopct=lambda x: '{:.0f}'.format(x*total_vacancies[1]/100), pctdistance=0.8)
